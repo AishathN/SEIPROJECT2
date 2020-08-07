@@ -1,12 +1,9 @@
 body {
   background-color: rgb(2, 0, 0);
 }
-
+@import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
-
-
 .wallPaper {
   background-image: url('../components/common/images/Hanky-Panky-in-Budapest.jpg');
   background-repeat: no-repeat;
@@ -17,9 +14,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items:center;
-  
 }
-
 .homestyle {
   display:flex;
   flex-direction: column;
@@ -42,7 +37,6 @@ body {
     padding:0px 20px 20px 20px;
   }
 }
-
 .navbarstyle {
   display:flex;
   justify-content: space-around;
@@ -51,16 +45,13 @@ body {
   color:lightgray;
   margin:20px 0px 0px 0px;
 }
-
 a {
   color:lightgray;
   text-decoration: none;
   font-size: 30px;
   padding:10px
 }
-
 .cocktailCard {
-
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -72,20 +63,14 @@ a {
   border: grey solid 1px;
   padding:20px;
   width:850px;
-
-
   img {
     width:400px;
   }
-  
-
   h4{
     font-weight: lighter;
     font-size: 15px;;
   }
-
 }
-
 .innercard {
   display:flex;
   flex-direction: row; 
@@ -93,15 +78,12 @@ a {
   padding:5px;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 400px;
-
-
   .buttonImage {
     width:50px;
     height:50px;
     margin: 30px 50px;
   }
 }
-
 .cocktailText {
   display:flex;
   flex-direction:column;
@@ -110,20 +92,36 @@ a {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 350px;
 }
-
-
-
 .buttonDiv {
-
   .buttonImage {
     width:50px;
     height:50px;
   }
-
 }
 
-.invisible{
-
+.invisible {
   height:0px;
   width:0px;
+
+}
+.error-page{
+  display:flex;
+  align-items: flex-end;
+  position: absolute;
+  margin-left: -480px;
+  background-repeat: no-repeat;
+  background-image: url('../components/common/images/errorpage.jpg');
+  background-image: 80%;
+  height: 500px;
+  width: 70%;
+  background-size: 100%;
+  color: white;
+  font-size: 47px;
+  font-family: 'Chelsea Market', cursive;
+  border: solid 3PX;
+  
+}
+
+.errorText {
+  padding:20px;
 }
