@@ -10,7 +10,7 @@ class Cocktail extends React.Component{
   state={
     booze: null,
     message: ' ',
-    measurements: '',
+    instructions: '',
     classbutton: 'buttonImage',
     ingredients: [],
     measures: [],
@@ -28,7 +28,6 @@ class Cocktail extends React.Component{
     
     try {
       const res = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      
       const booze = res.data.drinks[0]
       const ingredients = []
       const measures = []
@@ -48,12 +47,11 @@ class Cocktail extends React.Component{
       } console.log(measures.filter(i => i))
       this.setState({ booze , measures: measures.filter(i => i) })
       this.setState({ booze: res.data.drinks[0] })
-
     
       for (let i = 0; i < this.state.ingredients.length ; i ++){
         combined.push(this.state.ingredients[i] + ' ' + this.state.measures[i] + ' ') 
       } 
-      this.setState({ combined: this.state.booze.strInstructions +  '  INGREDIENT LIST : '  + combined  })
+      this.setState({ combined: combined  })
       console.log(this.state.combined)
 
     } catch (err){
@@ -62,6 +60,7 @@ class Cocktail extends React.Component{
   }
 
   clickDrink = () => {
+    this.setState({ instructions: ' ' })
     this.setState({ classbutton: 'buttonImage' })
     this.setState({ measurements: '' })
     this.setState({ message: ' ' })
@@ -69,13 +68,11 @@ class Cocktail extends React.Component{
   }
   getRecipe = () => {
     this.setState({ classbutton: 'invisible' })
-    this.setState({ message: this.state.combined })
+    this.setState({ instructions: this.state.booze.strInstructions })
+    this.setState({ message: this.state.combined.map((ingredient) => {
+      return <li key={ingredient.idDrink}>{ingredient}</li>
+    }) })
 
-    // {this.state.booze.strInstructions}
-    // this is a cheeky placeholder after all the failed maps, filters and for loops
-    // this.setState({ message: this.state.booze.drinks[0].strInstructions })
-    // this.setState({ measurements: this.state.booze.drinks[0].strIngredient1 + ' ' + this.state.booze.drinks[0].strMeasure1 + 
-    // ' , ' +  this.state.booze.drinks[0].strIngredient2 + ' ' + this.state.booze.drinks[0].strMeasure2 + ' ' })
   }
   
   render(){
@@ -86,16 +83,21 @@ class Cocktail extends React.Component{
           <div className="innercard">
             <div><img src={this.state.booze.strDrinkThumb}></img></div>
             <div className="cocktailText">
-              <div><h2>{this.state.booze.strDrink}</h2></div>
-              <div><h4><p>{this.state.message}</p></h4></div>
-              <div className="buttonDiv">
-                <img className ="buttonImage" src={cross} width="50" height="50" onClick={this.clickDrink}></img>
-                <img id ="checkmark" className ={this.state.classbutton} src={check} width="50" height="50"  onClick={this.getRecipe}></img>
+              <div className="cocktailText">
+                <div><h2>{this.state.booze.strDrink}</h2></div>
+                <div><h4><p>{this.state.instructions}</p></h4>
+                  <ul>
+                    {this.state.message}
+                  </ul>
+                </div>
+                <div className="buttonDiv">
+                  <img className ="buttonImage" src={cross} width="50" height="50" onClick={this.clickDrink}></img>
+                  <img id ="checkmark" className ={this.state.classbutton} src={check} width="50" height="50"  onClick={this.getRecipe}></img>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
     )
   }
